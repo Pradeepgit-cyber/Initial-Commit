@@ -26,5 +26,9 @@ class user (HttpUser):
                 logger.info("API Sucessful")
                 print(response.text)
                 logger.warning(response.text)
+            else:
+                print("API Fail")
+
+
 
 
