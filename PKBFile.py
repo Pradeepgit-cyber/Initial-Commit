@@ -27,7 +27,7 @@ class user (HttpUser):    #first step class creation
                 print(response.text)
                 logger.warning(response.text) #print warning in the logs of the locust whenever waring came then a excalamtion mark shown on logs of the locust
             else:
-                print("API Failed")
+                print("API ok")
 
 
 
