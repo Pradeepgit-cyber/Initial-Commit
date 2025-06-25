@@ -1,9 +1,10 @@
 from selectors import SelectSelector
 
+from faker import Faker
 from locust import HttpUser, between, task
 from socketio.async_server import task_reference_holder
 
-
+fake=Faker()
 class user(HttpUser):
     wait_time = between(1,5)
     host = "https://test.api.hudle.in/"
@@ -11,8 +12,8 @@ class user(HttpUser):
     @task
     def Learning(self):
         data ={
-            "name": "Jdjd",
-            "phone_number": "6540404044",
+            "name": fake.name(),
+            "phone_number": fake.phone_number(),
             "sms_channel": "1",
             "receive_updates": "1"
         }
@@ -26,7 +27,12 @@ class user(HttpUser):
 
             if response.status_code in [200,201]:
                 print("API Pass")
+                print(response['name'])
+                print(response['phone_number'])
 
             else:
               print("API Fail")
+              print(response.text)
+              print(data['name'])
+              print(data['phone_number'])
 
