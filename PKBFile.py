@@ -27,7 +27,7 @@ class user (HttpUser):
                 print(response.text)
                 logger.warning(response.text)
             else:
-                print("API Fail")
+                print("API Failed")
 
 
 
