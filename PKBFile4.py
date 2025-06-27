@@ -24,6 +24,7 @@ class user(HttpUser):
          with self.client.post("api/v1/register/consumer",json=data,headers=headers_auth) as response:
                 if response.status_code in (200,201):
                     print("API Pass")
+                    print(data["phone_number"])
 
                 else:
                     print("API fail")
