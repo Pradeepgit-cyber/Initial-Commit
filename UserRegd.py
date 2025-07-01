@@ -9,6 +9,7 @@ class user(HttpUser):
     phone_number = "7053355200"
     otp_code = "48353" # Replace with actual OTP retrieval if possible
     auth_token = ""
+    header_with_Authtoken = ""
 
     #
     # @task(1)
@@ -36,6 +37,7 @@ class user(HttpUser):
 
     @task
     def otp_request_and_verify(self):
+
         # Step 1: Request OTP
         data_request = {
             "phone_number": self.phone_number,
@@ -75,10 +77,6 @@ class user(HttpUser):
                 res_json_2 = res_json.get('data',{}).get('token')
                 print("test   : " f"{res_json_2}")
 
-
-
-
-
             else:
                 print("OTP Verify API fail")
                 print(response.text)
@@ -87,10 +85,54 @@ class user(HttpUser):
             if self.auth_token:
                 headers_with_token = headers_auth.copy()
                 headers_with_token["Authorization"] = f"Bearer {self.auth_token}"
+                self.header_with_Authtoken = headers_with_token
 
                 print("new headers :" f"{headers_with_token}")
                 print("old headers :" f"{headers_auth}")
 
             else:
                 print("token not found")
+
+
+
+
+        #  Step 3:Game creation data
+        game_data = {
+                        "name": "Badminton",
+                        "desc": "This is for testing.",
+                        "per_player_share": 100.0,
+                        "no_of_participants": 2,
+                        "from": "2025-06-30 11:00:00",
+                        "to": "2025-06-30 12:00:00",
+                        "address": "Delhi",
+                        "latitude": 28.5535094,
+                        "longitude": 77.2670094,
+                       # "venue_id": None,
+                        "sport_id": 2,
+                        "sport_category_id": 5,
+                        "is_paid": 1,
+                        "additional_fields": [0, 1, 3, 2, 4],
+                        "skill_level_min": 5.0,
+                        "skill_level_max": 7.0,
+                        "tag_group_ids": [
+                            "01317891-d6b2-480c-8653-5b4609ef2d86"
+                        ],
+                        "users": [],
+                        "numbers": [],
+                        "access_type": 0,
+                        "type": 0,
+                        "place_id": None,
+                        "is_friendly": False
+                    }
+        url = "https://test.group-and-games.prod.hudle.in/api/v2/game/create"
+
+        with self.client.post(url,json=game_data, headers=self.header_with_Authtoken,
+                                          name="Create Game") as response:
+                        if response.status_code in (200, 201):
+                            print("Game created successfully!")
+                            print(response.json())
+                        else:
+                            print("Failed to create game")
+                            print(response.status_code, response.text)
+
 

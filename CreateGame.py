@@ -5,8 +5,9 @@ class user(HttpUser):
     wait_time = between(1,5)
     host = "https://test.group-and-games.prod.hudle.in/"
 
+
     @task(1)
-    def Creategame(self):
+    def Create_game(self, headers_with_token=None):
 
         data ={
             "name": "Badminton",
@@ -18,7 +19,7 @@ class user(HttpUser):
             "address": "Delhi",
             "latitude": 28.5535094,
             "longitude": 77.2670094,
-            "venue_id": null,
+            "venue_id": None,
             "sport_id": 2,
             "sport_category_id": 5,
             "is_paid": 1,
@@ -38,10 +39,17 @@ class user(HttpUser):
             "numbers": [],
             "access_type": 0,
             "type": 0,
-            "place_id": null,
-            "is_friendly": false
+            "place_id": None,
+            "is_friendly": False
         }
 
-        headers_auth = {
+        with self.client.post("api/v1/game/create", json=data, headers=headers_with_token,
+                              name="Create Game") as response:
+            if response.status_code in (200, 201):
+                print("✅ Game created successfully!")
+                print(response.json())
+            else:
+                print("Failed to create game")
+                print(response.status_code, response.text)
 
-        }
+
