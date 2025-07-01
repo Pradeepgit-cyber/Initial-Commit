@@ -130,7 +130,10 @@ class user(HttpUser):
                                           name="Create Game") as response:
                         if response.status_code in (200, 201):
                             print("Game created successfully!")
-                            print(response.json())
+                            #print("Game :  ",  response.json())
+                            print("Game :  ", f"{response.json()}")
+                            print(game_data)
+
                         else:
                             print("Failed to create game")
                             print(response.status_code, response.text)
