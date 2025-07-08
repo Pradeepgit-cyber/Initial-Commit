@@ -185,4 +185,18 @@ class user(HttpUser):
                 print(response.status_code, response.text)
 
 
+    @task
+    def sports_all(self):
+        url = "https://test.group-and-games.prod.hudle.in/api/v2/sport/all"
+        with self.client.get(url,headers=self.header_with_Authtoken,name="sport_all") as response:
+            if response.status_code == 200:
+                print("All sports")
+                print("sportsall : ", f"{response.json()}")
+            else:
+                print("All sports API Failed")
+                print(response.status_code, response.text)
+
+
+
+
 
