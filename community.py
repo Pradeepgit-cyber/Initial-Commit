@@ -116,9 +116,7 @@ class user(HttpUser):
                 "name": "Padel Group",
                 "address": "28, Okhla Phase III, Okhla Industrial Estate, New Delhi, Delhi 110020, India",
                 "type": 0,
-                "sports": [
-                    44
-                ],
+                "sports": [44],
                 "users": [],
                 "desc": "This is a optional field.",
                 "latitude": 28.5535072,
@@ -176,7 +174,7 @@ class user(HttpUser):
                 print("Failed to fetch discover list")
                 print(response.status_code, response.text)
 
-        with self.client.get(url_games,headers=self.header_with_Authtoken,name="discover_games") as response:
+        with self.client.get(url_games,headers=self.header_with_Authtoken,name="Upcoming_games") as response:
             if response.status_code == 200 :
                 print("List of discovergames")
                 print("mygames :  ", f"{response.json()}")
@@ -185,7 +183,7 @@ class user(HttpUser):
                 print(response.status_code, response.text)
 
 
-    @task
+    @task            #All sports
     def sports_all(self):
         url = "https://test.group-and-games.prod.hudle.in/api/v2/sport/all"
         with self.client.get(url,headers=self.header_with_Authtoken,name="sport_all") as response:
@@ -195,6 +193,24 @@ class user(HttpUser):
             else:
                 print("All sports API Failed")
                 print(response.status_code, response.text)
+
+
+    @task        #Fcm Token
+    def Fcm(self):
+        fcm_data = {
+            "fcm_id": "fZQ4_PM5QYGySRludrgdu4:APA91bHUpqolzFiNoctp6On0mYv7eGvbFycx9yUjkRzvzgNF-MPsQqVXEQB8kBOah7dqs5pMeGrItTAW5Ceca43lDqkYryDZ9EpChjB1MJ-tObBKo79x1x4"
+        }
+        url = "https://test.api.hudle.in/api/v1/user/fcm"
+        with self.client.post(url,json=fcm_data,headers=self.header_with_Authtoken,name="Fcm_token") as response:
+            if response.status_code == 200:
+                print("FCM Token Pass")
+                print("Fcm token : ", f"{response.json()}")
+
+            else:
+                print("Fcm token failed")
+                print(response.status_code,response.text)
+
+
 
 
 
