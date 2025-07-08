@@ -29,7 +29,7 @@ class user(HttpUser):
         }
 
         with self.client.post("api/v1/otp/new", json=data_request, headers=headers_auth,
-                              name="Request OTP") as response:
+                              name="Request_OTP") as response:
             if response.status_code in (200, 204):
                 print("OTP Request API Pass")
 
@@ -45,7 +45,7 @@ class user(HttpUser):
 
         }
 
-        with self.client.post("api/v1/otp/verify", json=login_data, headers=self.headers_auth, name="Verify OTP") as response:
+        with self.client.post("api/v1/otp/verify", json=login_data, headers=self.headers_auth, name="Verify_OTP") as response:
             if response.status_code in (200,201):
                 res_data= response.json().get("data")
                 self.auth_token= res_data.get("token")
@@ -61,7 +61,7 @@ class user(HttpUser):
                 print(response.text)
 
 
-    @task                       #create Game
+    @task                       #Community - create Game
     def Create_game(self, headers_with_token=None):
         game_data ={
             "name": "Badminton",
@@ -100,7 +100,7 @@ class user(HttpUser):
         url = "https://test.group-and-games.prod.hudle.in/api/v2/game/create"
 
         with self.client.post(url, json=game_data, headers=self.header_with_Authtoken,
-                              name="Create Game") as response:
+                              name="Create_Game") as response:
             if response.status_code in (200, 201):
                 print("Game created successfully!")
                 print("Game :  ", f"{response.json()}")
@@ -110,7 +110,7 @@ class user(HttpUser):
                 print(response.status_code, response.text)
 
 
-    @task
+    @task             #Community - Create Group
     def create_groups(self):
         group_data = {
                 "name": "Padel Group",
@@ -141,7 +141,7 @@ class user(HttpUser):
     def my_games(self):
         url = "https://test.group-and-games.prod.hudle.in/api/v2/users/my-games"
 
-        with self.client.get(url,headers=self.header_with_Authtoken,name="mygames") as response:
+        with self.client.get(url,headers=self.header_with_Authtoken,name="my_games") as response:
             if response.status_code in (200, 201):
                 print("List of my Created games")
                 print("mygames :  ", f"{response.json()}")
@@ -153,7 +153,7 @@ class user(HttpUser):
     def my_groups(self):
         url = "https://test.group-and-games.prod.hudle.in/api/v1/users/my-groups"
 
-        with self.client.get(url,headers=self.header_with_Authtoken,name="mygroups") as response:
+        with self.client.get(url,headers=self.header_with_Authtoken,name="my_groups") as response:
             if response.status_code in (200, 201):
                 print("List of my groups")
                 print("mygroups :  ", f"{response.json()}")
@@ -168,7 +168,7 @@ class user(HttpUser):
         url_groups = "https://test.group-and-games.prod.hudle.in/api/v2/users/discover/groups"  #Discover groups
         url_games = "https://test.group-and-games.prod.hudle.in/api/v2/users/discover/games"    #Upcoming games
 
-        with self.client.get(url_groups,headers=self.header_with_Authtoken,name="discovergroups") as response:
+        with self.client.get(url_groups,headers=self.header_with_Authtoken,name="discover_groups") as response:
             if response.status_code == 200 :
                 print("List of Discovergroups")
                 print("mygroup :  ", f"{response.json()}")
