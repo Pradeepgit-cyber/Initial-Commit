@@ -56,12 +56,8 @@ class user(HttpUser):
                 print("Auth successful, token fetched.")
                 print(self.auth_token)
                 print(f"this is header: {self.header_with_Authtoken}")
-
-
-
             else:
                 print("Failed to authenticate.")
-
                 print(response.text)
 
 
@@ -117,46 +113,21 @@ class user(HttpUser):
     @task
     def create_groups(self):
         group_data = {
-            "success": true,
-            "code": 201,
-            "data": {
-                "id": "2374b8b4-2c62-424d-b8cb-0ae54694fb67",
                 "name": "Padel Group",
                 "address": "28, Okhla Phase III, Okhla Industrial Estate, New Delhi, Delhi 110020, India",
-                "city": {
-                    "id": 1,
-                    "name": "Delhi",
-                    "is_active": true
-                },
-                "sports": [
-                    {
-                        "id": 44,
-                        "name": "Padel",
-                        "photo": {
-                            "small": "https://d1x0266vd61ta8.cloudfront.net/compressed/photos/sport/44/1750679155-1654175712-padel.png",
-                            "normal": "https://d1x0266vd61ta8.cloudfront.net/original/photos/sport/44/1750679155-1654175712-padel.png"
-                        }
-                    }
-                ],
                 "type": 0,
-                "skill_level": None,
-                "description": "This is a optional field.",
-                "members_count": 1,
-                "games_count": 0,
-                "upcoming_games_count": 0,
-                "join_status": 0,
-                "my_role": 1,
-                "share_url": {
-                    "url": "https://hudle.page.link/tPBCsbvYUte9KR4u8"
-                },
+                "sports": [
+                    44
+                ],
+                "users": [],
+                "desc": "This is a optional field.",
                 "latitude": 28.5535072,
-                "longitude": 77.2670258,
-                "is_active": 0
+                "longitude": 77.2670258
             }
-        }
+
 
         url = "https://test.group-and-games.prod.hudle.in/api/v1/groups"
-        with self.client.post(url,headers=self.header_with_Authtoken,name="Create_Group") as response:
+        with self.client.post(url,json=group_data,headers=self.header_with_Authtoken,name="Create_Group") as response:
             if response.status_code in (200, 201):
                 print("Group created successfully!")
                 print("Group :  ", f"{response.json()}")
