@@ -66,8 +66,7 @@ class user(HttpUser):
             "type": "2"
         }
 
-        with self.client.post("api/v1/otp/verify", json=data_verify, headers=headers_auth,
-                              name="Verify OTP") as response:
+        with self.client.post("api/v1/otp/verify", json=data_verify, headers=headers_auth,name="Verify OTP") as response:
             if response.status_code in (200, 201):
                 print("OTP Verify API Pass")
                 print(response.text)
@@ -120,7 +119,7 @@ class user(HttpUser):
                         "users": [],
                         "numbers": [],
                         "access_type": 0,
-                        "type": 0,
+                        "type": 1,
                         "place_id": None,
                         "is_friendly": False
                     }
@@ -130,7 +129,6 @@ class user(HttpUser):
                                           name="Create Game") as response:
                         if response.status_code in (200, 201):
                             print("Game created successfully!")
-                            #print("Game :  ",  response.json())
                             print("Game :  ", f"{response.json()}")
                             print(game_data)
 
