@@ -44,4 +44,5 @@ class user(HttpUser):
               print(response.text)
               print(data['name'])
               print(data['phone_number'])
+        return response
 
