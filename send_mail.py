@@ -16,7 +16,6 @@ EMAIL_PASSWORD = 'gfdb cebi bztm aded'  # App Password
 attachment_path = '/Users/pradeepbaraik/PycharmProjects/PythonProject3/Revised Latest Resume-Pradeep-2025 (1).pdf'
 if not os.path.isfile(attachment_path):
     raise FileNotFoundError(f"Attachment not found: {attachment_path}")
-
 # Email body (same for all)
 email_body = """\
 Dear Hiring Manager,
