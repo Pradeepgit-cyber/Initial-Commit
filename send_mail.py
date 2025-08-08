@@ -5,7 +5,7 @@ import os
 import mimetypes
 
 # CSV path
-csv_path ='/Users/pradeepbaraik/PycharmProjects/PythonProject3/Emails.csv'
+csv_path ='/Users/pradeepbaraik/PycharmProjects/Initial-Commit/Emails.csv'
 data = pd.read_csv(csv_path)
 
 # Gmail credentials
@@ -13,16 +13,16 @@ EMAIL_ADDRESS = 'pradeep.kr.baraik@gmail.com'
 EMAIL_PASSWORD = 'gfdb cebi bztm aded'  # App Password
 
 # Attachment file (resume)
-attachment_path = '/Users/pradeepbaraik/PycharmProjects/PythonProject3/Revised Latest Resume-Pradeep-2025 (1).pdf'
+attachment_path = '/Users/pradeepbaraik/PycharmProjects/Initial-Commit/Revised Latest Resume-Pradeep-2025 (1).pdf'
 if not os.path.isfile(attachment_path):
     raise FileNotFoundError(f"Attachment not found: {attachment_path}")
 # Email body (same for all)
 email_body = """\
 Dear Hiring Manager,
 
-I am writing to apply for the Senior QA Engineer position. With over 5+ years of experience in quality assurance and software testing, I bring a solid background in both manual and automated testing practices.
+I am writing to apply for the QA Engineer position(Manual). With over 5+ years of experience in quality assurance and software testing, I bring a solid background in both manual and automated testing practices.
 
-My expertise includes tools such as Manual Testing, Postman, JIRA, Jmeter, Locust, Python(Basics), Selenium and experience in test planning, execution, and defect management across agile environments. I have consistently contributed to improving product quality and release efficiency in previous roles.
+My expertise includes tools such as Manual Testing, Functional & Non-Functional Testing, Postman, JIRA, Jmeter, Locust, Python(Basics), Selenium and experience in test planning, execution, and defect management across agile environments. I have consistently contributed to improving product quality and release efficiency in previous roles.
 
 Please find my resume attached for your consideration. I am available for further discussion at your convenience.
 
